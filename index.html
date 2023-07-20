@@ -1,93 +1,134 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>JavaScript Practice</title>
-</head>
-<body>
-  <script>
-    // Your JavaScript goes here!
+  <head>
+    <meta charset="UTF-8" />
+    <title>JavaScript Practice</title>
+  </head>
+  <body>
+    <script>
+      // Your JavaScript goes here!
 
-      function pickComputerChoice () {                       //create a function to choice randomly between roc, paper, and scissors
-        let num = (Math.floor(Math.random() * 3)+1);          //creates varaible num with a random value between 1-3
-        let choice;                                          //creates a variable to hold the choice after converted from a number
-        if (num === 1) {                                     //takes the variable number and converts it to a string, makes a console log sharing string, and retruns string from function.
-            choice = "rock";
-            console.log("Computer Choice is " + choice);
-            return "rock"; 
-         } else if(num === 2){
-            choice = "scissors";
-            console.log("Computer Choice is " + choice);
-            return "scissors";
+      function pickComputerChoice() {
+        //create a function to choice randomly between rock, paper, and scissors
+        let num = Math.floor(Math.random() * 3) + 1; //creates varaible num with a random value between 1-3
+        let choice; //creates a variable to hold the choice after converted from a number
+        if (num === 1) {
+          //takes the variable number and converts it to a string, makes a console log sharing string, and retruns string from function.
+          choice = "rock";
+          console.log("Computer Choice is " + choice);
+          return "rock";
+        } else if (num === 2) {
+          choice = "scissors";
+          console.log("Computer Choice is " + choice);
+          return "scissors";
         } else {
-            choice = "paper";
-            console.log("Computer Choice is " + choice);
-            return "paper";
+          choice = "paper";
+          console.log("Computer Choice is " + choice);
+          return "paper";
         }
-    }
+      }
 
-   function askUserChoice () {                               //create a function to ask the user what it chooses, then checks those choices to make sure it is valid
-    let choice = prompt("Rock, Paper, or Scissors?"," ");    //Asks user for input
-    let val = false;                                         //variable used to check if the input is valid
-    while (val === false) {                                  //loop runs as long as no valid answer has been given
-        
-        if (choice === null || choice ===undefined) {        //if no response or escape will prompt to input again
+      function askUserChoice() {
+        //create a function to ask the user what it chooses, then checks those choices to make sure it is valid
+        let choice = prompt("Rock, Paper, or Scissors?", " "); //Asks user for input
+        let val = false; //variable used to check if the input is valid
+        while (val === false) {
+          //loop runs as long as no valid answer has been given
+
+          if (choice === null || choice === undefined) {
+            //if no response or escape will prompt to input again
             val = false;
-            choice = prompt("Invalid entry, try again. Rock, Paper, or Scissors?"," ");
-        }else {                                              //if response is not null or undefined then will convert to lower case, trim off extra spaces
+            choice = prompt(
+              "Invalid entry, try again. Rock, Paper, or Scissors?",
+              " "
+            );
+          } else {
+            //if response is not null or undefined then will convert to lower case, trim off extra spaces
             choice = choice.toLowerCase();
             choice = choice.trim();
             val = true;
-        }
+          }
 
-        if (val === true && (choice === "rock" || 
-            choice === "paper" || choice === "scissors")){        //if its one of our 3 responses does nothing
-                                                            
-        }else{
-            choice = prompt("Invalid entry, try again. Rock, Paper, or Scissors?"," ");    //if it is not one of 3 responses will prompt to input again
-        }                                                    
-    }
-    return choice;                                           //then returns the input from user after being checked for being valid
-    }
-  
-   function chooseWinner (userChoice, computerChoice){       //create a function to compare the user input and the computer choice to find a winner
-    let winner;
-    if (computerChoice === userChoice){
-        console.log("You tied! You both picked " + userChoice + 
-        "! No points for you this round!");
-        return 0;
-    }else if ((computerChoice === "rock" & userChoice === "paper") ||
-        (computerChoice === "scissors" & userChoice === "rock") || 
-        (computerChoice === "paper" & userChoice === "scissors")){
-        console.log("You won, " + userChoice + " beats " + computerChoice + "!");
-        return 1;
-    }else if ((computerChoice === "rock" & userChoice === "scissors") ||
-        (computerChoice === "scissors" & userChoice === "paper") || 
-        (computerChoice === "paper" & userChoice === "rock")){
-        console.log("You lost, " + computerChoice + " beats " + userChoice + "!");
-        return 0;
-    }else {
-        console.log("Couldnt play, user choice invalid") ;
-        return 0;
-    }
-   }
-   
-   function game (rounds) {                                   //create a function to play a chosen number of rounds
-    let score = 0;                                            //the starting score is zero and user only gets points if they win not tie
-    for (let i = 0; i < rounds; i++) {                        //loop will run the number of inputed rounds, at the end will say if player won or lost
-        score = score + (chooseWinner(askUserChoice(), pickComputerChoice()));
+          if (
+            val === true &&
+            (choice === "rock" || choice === "paper" || choice === "scissors")
+          ) {
+            //if its one of our 3 responses does nothing
+          } else {
+            choice = prompt(
+              "Invalid entry, try again. Rock, Paper, or Scissors?",
+              " "
+            ); //if it is not one of 3 responses will prompt to input again
+          }
         }
-    if (score >= (rounds/2)){
-        return ("Winner! You won " + score + " rounds out of " + rounds + " rounds!");
-    }else if (score === 1){
-        return ("You lost! You only won " + score + " round out of " + rounds + " rounds.") ;
-    }else {
-        return ("You lost! You only won " + score + " rounds out of " + rounds + " rounds.") ;
-    }
-   }
+        return choice; //then returns the input from user after being checked for being valid
+      }
 
-   console.log(game(5));
-   
-  </script>
-</body>
+      function chooseWinner(userChoice, computerChoice) {
+        //create a function to compare the user input and the computer choice to find a winner
+        let winner;
+        if (computerChoice === userChoice) {
+          console.log(
+            "You tied! You both picked " +
+              userChoice +
+              "! No points for you this round!"
+          );
+          return 0;
+        } else if (
+          (computerChoice === "rock") & (userChoice === "paper") ||
+          (computerChoice === "scissors") & (userChoice === "rock") ||
+          (computerChoice === "paper") & (userChoice === "scissors")
+        ) {
+          console.log(
+            "You won, " + userChoice + " beats " + computerChoice + "!"
+          );
+          return 1;
+        } else if (
+          (computerChoice === "rock") & (userChoice === "scissors") ||
+          (computerChoice === "scissors") & (userChoice === "paper") ||
+          (computerChoice === "paper") & (userChoice === "rock")
+        ) {
+          console.log(
+            "You lost, " + computerChoice + " beats " + userChoice + "!"
+          );
+          return 0;
+        } else {
+          console.log("Couldnt play, user choice invalid");
+          return 0;
+        }
+      }
+
+      function game(rounds) {
+        //create a function to play a chosen number of rounds
+        let score = 0; //the starting score is zero and user only gets points if they win not tie
+        for (let i = 0; i < rounds; i++) {
+          //loop will run the number of inputed rounds, at the end will say if player won or lost
+          score = score + chooseWinner(askUserChoice(), pickComputerChoice());
+        }
+        if (score >= rounds / 2) {
+          return (
+            "Winner! You won " + score + " rounds out of " + rounds + " rounds!"
+          );
+        } else if (score === 1) {
+          return (
+            "You lost! You only won " +
+            score +
+            " round out of " +
+            rounds +
+            " rounds."
+          );
+        } else {
+          return (
+            "You lost! You only won " +
+            score +
+            " rounds out of " +
+            rounds +
+            " rounds."
+          );
+        }
+      }
+
+      console.log(game(5));
+    </script>
+  </body>
 </html>
