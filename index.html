@@ -31,40 +31,60 @@
 
    //create a fucntion to ask the user what it chooses, then checks those choices to make sure it is valid
    function askUserChoice () {
-    //ask the user for a choice then saves it as the variable num
-    let num = prompt("Rock, Paper, or Scissors?"," ");
-    //creates variable val to be used in valid choice check
-    let val;
-    if (num === null || num ===undefined) {
-        val = false
-    }else {
-        num = num.toLowerCase();
-        num = num.trim();
-        val = true
-    }
+    let num = prompt("Rock, Paper, or Scissors?"," "); 
+    let val = false; //variable used to check if the input is valid
+    while (val === false) {
+        
+        if (num === null || num ===undefined) {
+            val = false
+            num = prompt("Invalid entry, try again. Rock, Paper, or Scissors?"," ");
+        }else {
+            num = num.toLowerCase();
+            num = num.trim();
+            val = true
+        }
 
-    if (val === true && (num === "rock" || num === "paper" || num === "scissors")){
-        return num;
-    }else {
-        console.log("Invalid Entry") 
+        if (val === true && (num === "rock" || num === "paper" || num === "scissors")){
+            
+        }else{
+            num = prompt("Invalid entry, try again. Rock, Paper, or Scissors?"," ");
+        }
     }
-    console.log("User Choice is " + num)
-   }
+    return num;
+    }
   
    function chooseWinner (userChoice, computerChoice){
     let winner;
     if (computerChoice === userChoice){
-        console.log("You tied! You both picked " + userChoice + "!")
+        console.log("You tied! You both picked " + userChoice + "! No points for you this round!")
+        return 0
     }else if ((computerChoice === "rock" & userChoice === "paper") || (computerChoice === "scissors" & userChoice === "rock") || (computerChoice === "paper" & userChoice === "scissors")){
         console.log("You won, " + userChoice + " beats " + computerChoice + "!")
+        return 1
     }else if ((computerChoice === "rock" & userChoice === "scissors") || (computerChoice === "scissors" & userChoice === "paper") || (computerChoice === "paper" & userChoice === "rock")){
         console.log("You lost, " + computerChoice + " beats " + userChoice + "!")
+        return 0
     }else {
         console.log("Couldnt play, user choice invalid") 
+        return 0
     }
    }
    
-   chooseWinner (askUserChoice(), pickComputerChoice());
+   function game (rounds) {
+    let score = 0;
+    for (let i = 0; i < rounds; i++) {
+        score = score + (chooseWinner(askUserChoice(), pickComputerChoice()))
+        }
+    if (score >= (rounds/2)){
+        return ("Winner! You won " + score + " rounds out of " + rounds + " rounds!")
+    }else if (score === 1){
+        return ("You lost! You only won " + score + " round out of " + rounds + " rounds.") 
+    }else {
+        return ("You lost! You only won " + score + " rounds out of " + rounds + " rounds.") 
+    }
+   }
+
+   console.log(game(5));
    
   </script>
 </body>
