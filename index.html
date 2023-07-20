@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Practice</title>
+</head>
+<body>
+  <script>
+    // Your JavaScript goes here!
+
+   //create a function to choice randomly between roc, paper, and scissors
+   function pickComputerChoice () {
+    //creates varaible num with a random value between 1-3
+    let num = (Math.floor(Math.random() * 3)+1) 
+    let choice;
+    //changes the random number to a random choice
+    if (num === 1) {
+        choice = "rock";
+        console.log("Computer Choice is " + choice)
+        return "rock"  
+    } else if(num === 2){
+        choice = "scissors";
+        console.log("Computer Choice is " + choice)
+        return "scissors"
+    } else {
+        choice = "paper";
+        console.log("Computer Choice is " + choice)
+        return "paper"
+    }
+   }
+
+   //create a fucntion to ask the user what it chooses, then checks those choices to make sure it is valid
+   function askUserChoice () {
+    //ask the user for a choice then saves it as the variable num
+    let num = prompt("Rock, Paper, or Scissors?"," ");
+    //creates variable val to be used in valid choice check
+    let val;
+    if (num === null || num ===undefined) {
+        val = false
+    }else {
+        num = num.toLowerCase();
+        num = num.trim();
+        val = true
+    }
+
+    if (val === true && (num === "rock" || num === "paper" || num === "scissors")){
+        return num;
+    }else {
+        console.log("Invalid Entry") 
+    }
+    console.log("User Choice is " + num)
+   }
+  
+   function chooseWinner (computerChoice, userChoice){
+    let winner;
+    if (computerChoice === userChoice){
+        console.log("You tied! You both picked " + userChoice + "!")
+    }else if ((computerChoice === "rock" & userChoice === "paper") || (computerChoice === "scissors" & userChoice === "rock") || (computerChoice === "paper" & userChoice === "scissors")){
+        console.log("You won, " + userChoice + " beats " + computerChoice + "!")
+    }else if ((computerChoice === "rock" & userChoice === "scissors") || (computerChoice === "scissors" & userChoice === "paper") || (computerChoice === "paper" & userChoice === "rock")){
+        console.log("You lost, " + computerChoice + " beats " + userChoice + "!")
+    }else {
+        console.log("Couldnt play, user choice invalid") 
+    }
+   }
+   
+   chooseWinner (pickComputerChoice(), askUserChoice());
+   
+  </script>
+</body>
+</html>
