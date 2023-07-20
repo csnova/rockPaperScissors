@@ -8,52 +8,48 @@
   <script>
     // Your JavaScript goes here!
 
-   //create a function to choice randomly between roc, paper, and scissors
-   function pickComputerChoice () {
-    //creates varaible num with a random value between 1-3
-    let num = (Math.floor(Math.random() * 3)+1) 
-    let choice;
-    //changes the random number to a random choice
-    if (num === 1) {
-        choice = "rock";
-        console.log("Computer Choice is " + choice)
-        return "rock"  
-    } else if(num === 2){
-        choice = "scissors";
-        console.log("Computer Choice is " + choice)
-        return "scissors"
-    } else {
-        choice = "paper";
-        console.log("Computer Choice is " + choice)
-        return "paper"
+      function pickComputerChoice () {                       //create a function to choice randomly between roc, paper, and scissors
+        let num = (Math.floor(Math.random() * 3)+1)          //creates varaible num with a random value between 1-3
+        let choice;                                          //creates a variable to hold the choice after converted from a number
+        if (num === 1) {                                     //takes the variable number and converts it to a string, makes a console log sharing string, and retruns string from function.
+            choice = "rock";
+            console.log("Computer Choice is " + choice)
+            return "rock"  
+         } else if(num === 2){
+            choice = "scissors";
+            console.log("Computer Choice is " + choice)
+            return "scissors"
+        } else {
+            choice = "paper";
+            console.log("Computer Choice is " + choice)
+            return "paper"
+        }
     }
-   }
 
-   //create a fucntion to ask the user what it chooses, then checks those choices to make sure it is valid
-   function askUserChoice () {
-    let num = prompt("Rock, Paper, or Scissors?"," "); 
-    let val = false; //variable used to check if the input is valid
-    while (val === false) {
+   function askUserChoice () {                               //create a function to ask the user what it chooses, then checks those choices to make sure it is valid
+    let choice = prompt("Rock, Paper, or Scissors?"," ");    //Asks user for input
+    let val = false;                                         //variable used to check if the input is valid
+    while (val === false) {                                  //loop runs as long as no valid answer has been given
         
-        if (num === null || num ===undefined) {
+        if (choice === null || choice ===undefined) {        //if no response or escape will prompt to input again
             val = false
-            num = prompt("Invalid entry, try again. Rock, Paper, or Scissors?"," ");
-        }else {
-            num = num.toLowerCase();
-            num = num.trim();
+            choice = prompt("Invalid entry, try again. Rock, Paper, or Scissors?"," ");
+        }else {                                              //if response is not null or undefined then will convert to lower case, trim off extra spaces
+            choice = choice.toLowerCase();
+            choice = choice.trim();
             val = true
         }
 
-        if (val === true && (num === "rock" || num === "paper" || num === "scissors")){
-            
+        if (val === true && (choice === "rock" || choice === "paper" || choice === "scissors")){ //if its one of our 3 responses does nothing
+                                                            
         }else{
-            num = prompt("Invalid entry, try again. Rock, Paper, or Scissors?"," ");
-        }
+            choice = prompt("Invalid entry, try again. Rock, Paper, or Scissors?"," ");    //if it is not one of 3 responses will prompt to input again
+        }                                                    
     }
-    return num;
+    return choice;                                           //then returns the input from user after being checked for being valid
     }
   
-   function chooseWinner (userChoice, computerChoice){
+   function chooseWinner (userChoice, computerChoice){       //create a function to compare the user input and the computer choice to find a winner
     let winner;
     if (computerChoice === userChoice){
         console.log("You tied! You both picked " + userChoice + "! No points for you this round!")
@@ -70,9 +66,9 @@
     }
    }
    
-   function game (rounds) {
-    let score = 0;
-    for (let i = 0; i < rounds; i++) {
+   function game (rounds) {                                   //create a function to play a chosen number of rounds
+    let score = 0;                                            //the starting score is zero and user only gets points if they win not tie
+    for (let i = 0; i < rounds; i++) {                        //loop will run the number of inputed rounds, at the end will say if player won or lost
         score = score + (chooseWinner(askUserChoice(), pickComputerChoice()))
         }
     if (score >= (rounds/2)){
