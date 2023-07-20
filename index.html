@@ -51,7 +51,7 @@
     console.log("User Choice is " + num)
    }
   
-   function chooseWinner (computerChoice, userChoice){
+   function chooseWinner (userChoice, computerChoice){
     let winner;
     if (computerChoice === userChoice){
         console.log("You tied! You both picked " + userChoice + "!")
@@ -64,7 +64,7 @@
     }
    }
    
-   chooseWinner (pickComputerChoice(), askUserChoice());
+   chooseWinner (askUserChoice(), pickComputerChoice());
    
   </script>
 </body>
