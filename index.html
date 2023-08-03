@@ -30,8 +30,13 @@
 
       function playRound(userChoice, computerChoice) {
         //create a function to compare the user input and the computer choice to find a winner
-        let winner;
         const content = document.querySelector("#content");
+        const subHead = document.createElement("h3");
+        subHead.classList.add("subHead");
+        if (score >= 5) {
+          return;
+        }
+        document.querySelector("#content");
         const para = document.createElement("p");
         para.classList.add("para");
         if (computerChoice === userChoice) {
@@ -40,7 +45,8 @@
             userChoice +
             "! No points for you this round!";
           content.appendChild(para);
-          return 0;
+          rounds += 1;
+          return;
         } else if (
           (computerChoice === "rock") & (userChoice === "paper") ||
           (computerChoice === "scissors") & (userChoice === "rock") ||
@@ -49,7 +55,24 @@
           para.textContent =
             "You won, " + userChoice + " beats " + computerChoice + "!";
           content.appendChild(para);
-          return 1;
+          score += 1;
+          rounds += 1;
+          if (score >= 5) {
+            if (score === rounds / 2) {
+              subHead.textContent = `Game Over! You tied! You won ${score} rounds out of ${rounds} rounds!`;
+              content.appendChild(subHead);
+              return;
+            } else if (score > rounds / 2) {
+              subHead.textContent = `Game Over! Winner! You won ${score} rounds out of ${rounds} rounds!`;
+              content.appendChild(subHead);
+              return;
+            } else {
+              subHead.textContent = `Game Over. You lost! You only won ${score} round out of ${rounds} rounds.`;
+              content.appendChild(subHead);
+              return;
+            }
+          }
+          return;
         } else if (
           (computerChoice === "rock") & (userChoice === "scissors") ||
           (computerChoice === "scissors") & (userChoice === "paper") ||
@@ -58,11 +81,12 @@
           para.textContent =
             "You lost, " + computerChoice + " beats " + userChoice + "!";
           content.appendChild(para);
-          return 0;
+          rounds += 1;
+          return;
         } else {
           para.textContent = "Couldn't play, user choice invalid";
           content.appendChild(para);
-          return 0;
+          return;
         }
       }
 
@@ -71,27 +95,11 @@
       const buttons = document.querySelectorAll("button");
       buttons.forEach((button) => {
         button.addEventListener("click", () => {
-          rounds += 1;
-          score += playRound(button.id, pickComputerChoice());
-          console.log(score);
+          playRound(button.id, pickComputerChoice());
+          console.log(`Score: ${score} Rounds: ${rounds}`);
         });
       });
 
-      if (score >= 5) {
-        const content = document.querySelector("#content");
-        const subHead = document.createElement("h3");
-        subHead.classList.add("subHead");
-        if (score === rounds / 2) {
-          subHead.textContent = `Game Over! You tied! You won ${score} rounds out of ${rounds} rounds!`;
-          content.appendChild(subHead);
-        } else if (score > rounds / 2) {
-          subHead.textContent = `Game Over! Winner! You won ${score} rounds out of ${rounds} rounds!`;
-          content.appendChild(subHead);
-        } else {
-          subHead.textContent = `Game Over. You lost! You only won ${score} round out of ${rounds} rounds.`;
-          content.appendChild(subHead);
-        }
-      }
       console.log(score);
     </script>
   </body>
